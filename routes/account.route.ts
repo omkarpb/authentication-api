@@ -58,7 +58,7 @@ router.get("/verifyEmail", (req: Request, res: Response, next: Function) => {
             logger.info(`Verifying email of id ${req.query.id}`);
             Account.findById(req.query.id, (err: any, account: AccountEntity) => {
                 if (err) {
-                    return ResponseUtility.sendJson(res, 400, err);;
+                    return ResponseUtility.sendJson(res, 400, err);
                 } else if (account) {
                     logger.info(`User record found for id ${req.query.id}`);
                     if (account.isActive) {
