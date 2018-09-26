@@ -137,7 +137,8 @@ router.get("/logout", function (req: Request, res: Response) {
 /**
  * User account update
  */
-router.put("/", function (req: Request, res: Response, next: Function) {
+router.put("/", VerifyUtility.authorizeUser, VerifyUtility.verifyEmail,
+    function (req: Request, res: Response, next: Function) {
     try {
         Account.findOneAndUpdate({ "email": req.body.email }, {
             "firstName": req.body.firstName,
@@ -167,7 +168,7 @@ router.put("/", function (req: Request, res: Response, next: Function) {
 /**
  * Handles forgotpassword operation
  */
-router.post("/forgotPassword", (req: Request, res: Response, next: Function) => {
+router.post("/forgotPassword", VerifyUtility.verifyEmail, (req: Request, res: Response, next: Function) => {
     Account.findOne({ "email": req.body.email }, (err: any, account: AccountEntity) => {
         if (err) {
             logger.error(err);
