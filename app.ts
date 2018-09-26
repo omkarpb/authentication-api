@@ -70,8 +70,7 @@ app.use((req: express.Request, res: express.Response, next: Function) => {
 // will print stacktrace
 if (app.get("env") === "development") {
   app.use(function(err: any, req: express.Request, res: express.Response, next: Function) {
-    res.status(err.status || 500);
-    res.render("error", {
+    res.status(err.status || 500).json({
       message: err.message,
       error: err
     });

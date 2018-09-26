@@ -7,7 +7,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", VerifyUtility.authorizeUser, VerifyUtility.verifyEmail, function(req: Request, res: Response, next: Function) {
-  res.render("index", { title: "Express" });
+  res.send({
+    "message": "Successful retrieval"
+  });
 });
 
 module.exports = router;
